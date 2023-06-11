@@ -1,5 +1,5 @@
 import {Inject, Injectable, Optional, PLATFORM_ID, TransferState} from "@angular/core";
-import {PROCESS_ENV, PROCESS_ENV_STATE} from "./process-env.types";
+import {PROCESS_ENV, PROCESS_ENV_STATE, ProcessEnvironment} from "./process-env.types";
 import {isPlatformBrowser, isPlatformServer} from "@angular/common";
 
 @Injectable()
@@ -7,8 +7,8 @@ export class ProcessEnvService {
 
   constructor (
     private transferState: TransferState,
-    @Optional() @Inject(PROCESS_ENV) private processEnv: { [key: string]: string; },
-    @Inject(PLATFORM_ID) private platformId: Object,
+    @Optional() @Inject(PROCESS_ENV) private processEnv: ProcessEnvironment,
+    @Inject(PLATFORM_ID) private platformId: string,
   ) {
   }
 
@@ -19,10 +19,10 @@ export class ProcessEnvService {
     if (!this.processEnv) {
       throw new Error("PROCESS_ENV has not been provided. Please add it to the providers of ngExpressEngine or a server module.");
     }
-    const clientEnv: { [key: string]: string; } = variables.reduce((acc, key) => {
+    const clientEnv: ProcessEnvironment = variables.reduce((acc, key) => {
       acc[key] = this.processEnv[key];
       return acc;
-    }, {} as { [key: string]: string; });
+    }, {} as ProcessEnvironment);
     this.transferState.set(PROCESS_ENV_STATE, clientEnv);
   }
 
