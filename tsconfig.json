@@ -19,6 +19,9 @@
     "paths": {
       "process-env": [
         "dist/process-env"
+      ],
+      "transfer-state": [
+        "dist/transfer-state"
       ]
     },
     "target": "ES2022",
