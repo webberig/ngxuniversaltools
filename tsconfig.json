@@ -20,6 +20,9 @@
       "process-env": [
         "dist/process-env"
       ],
+      "seo": [
+        "dist/seo"
+      ],
       "transfer-state": [
         "dist/transfer-state"
       ]
