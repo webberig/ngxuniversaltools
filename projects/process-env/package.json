@@ -8,5 +8,8 @@
   "dependencies": {
     "tslib": "^2.3.0"
   },
+  "repository": "https://github.com/webberig/ngxuniversaltools",
+  "license": "MIT",
+  "author": "Mathieu Maes",
   "sideEffects": false
 }

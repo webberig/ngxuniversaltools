@@ -44,5 +44,8 @@
     "karma-jasmine-html-reporter": "~2.0.0",
     "ng-packagr": "^16.0.0",
     "typescript": "~5.0.2"
-  }
+  },
+  "repository": "https://github.com/webberig/ngxuniversaltools",
+  "license": "MIT",
+  "author": "Mathieu Maes"
 }
