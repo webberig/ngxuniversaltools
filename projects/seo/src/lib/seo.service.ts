@@ -2,6 +2,8 @@ import {Inject, Injectable} from "@angular/core";
 import {Meta, MetaDefinition, Title} from "@angular/platform-browser";
 import {DOCUMENT} from "@angular/common";
 import {JsonLd} from "./seo.types";
+import {PageAbstract} from "./PageAbstract";
+import {Subject} from "rxjs";
 
 function sanitizeObject<t extends object> (obj: t): t {
   const objClone = {...obj};
@@ -14,9 +16,15 @@ function sanitizeObject<t extends object> (obj: t): t {
 }
 
 @Injectable()
-export class MetaHandlerService {
+export class SeoService<t extends PageAbstract = PageAbstract> {
 
   private tags: { [key: string]: MetaDefinition } = {};
+
+  page$ = new Subject<t | null>();
+
+  setPage (page: t | null) {
+    this.page$.next(page);
+  }
 
   constructor (
     private meta: Meta,

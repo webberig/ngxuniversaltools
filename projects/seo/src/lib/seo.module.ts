@@ -1,9 +1,13 @@
 import {NgModule} from "@angular/core";
-import {MetaHandlerService} from "./metaHandler.service";
+import {SeoService} from "./seo.service";
+import {RouterOutletDirective} from "./routerOutlet.directive";
 
 @NgModule({
+  declarations: [
+    RouterOutletDirective,
+  ],
   providers: [
-    MetaHandlerService,
+    SeoService,
   ],
   imports: [],
   exports: []
