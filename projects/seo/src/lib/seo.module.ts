@@ -10,6 +10,8 @@ import {RouterOutletDirective} from "./routerOutlet.directive";
     SeoService,
   ],
   imports: [],
-  exports: []
+  exports: [
+    RouterOutletDirective,
+  ]
 })
 export class SeoModule {}
