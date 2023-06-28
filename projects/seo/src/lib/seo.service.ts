@@ -44,7 +44,7 @@ export class SeoService<t extends PageAbstract = PageAbstract> {
       property: name,
     } : {
       content,
-      property: name,
+      name: name,
     };
     this.updateTag(tag);
   }
