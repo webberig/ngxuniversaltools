@@ -6,12 +6,17 @@ import {RouterOutletDirective} from "./routerOutlet.directive";
   declarations: [
     RouterOutletDirective,
   ],
-  providers: [
-    SeoService,
-  ],
-  imports: [],
   exports: [
     RouterOutletDirective,
   ]
 })
-export class SeoModule {}
+export class SeoModule {
+  static forRoot () {
+    return {
+      ngModule: SeoModule,
+      providers: [
+        SeoService,
+      ]
+    };
+  }
+}
