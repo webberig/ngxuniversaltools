@@ -3,7 +3,7 @@ import {Meta, MetaDefinition, Title} from "@angular/platform-browser";
 import {DOCUMENT} from "@angular/common";
 import {JsonLd} from "./seo.types";
 import {PageAbstract} from "./PageAbstract";
-import {Subject} from "rxjs";
+import {ReplaySubject} from "rxjs";
 
 function sanitizeObject<t extends object> (obj: t): t {
   const objClone = {...obj};
@@ -15,12 +15,12 @@ function sanitizeObject<t extends object> (obj: t): t {
   return objClone;
 }
 
-@Injectable()
+@Injectable({providedIn: "root"})
 export class SeoService<t extends PageAbstract = PageAbstract> {
 
   private tags: { [key: string]: MetaDefinition } = {};
 
-  page$ = new Subject<t | null>();
+  page$ = new ReplaySubject<t | null>(1);
 
   setPage (page: t | null) {
     this.page$.next(page);
