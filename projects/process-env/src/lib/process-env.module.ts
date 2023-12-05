@@ -1,26 +1,16 @@
-import {APP_INITIALIZER, ModuleWithProviders, NgModule} from "@angular/core";
-import {ProcessEnvService} from "./process-env.service";
+import {ModuleWithProviders, NgModule} from "@angular/core";
+import {provideProcessEnv} from "./provideProcessEnv";
 
 
 @NgModule({
-  declarations: [
-  ],
-  imports: [
-  ],
+  declarations: [],
+  imports: [],
 })
 export class ProcessEnvModule {
-  static forRoot (config: { clientVariables: string[]; }): ModuleWithProviders<ProcessEnvModule> {
+  static forRoot(config: { clientVariables: string[]; }): ModuleWithProviders<ProcessEnvModule> {
     return {
       ngModule: ProcessEnvModule,
-      providers: [
-        ProcessEnvService,
-        {
-          provide: APP_INITIALIZER,
-          multi: true,
-          deps: [ProcessEnvService],
-          useFactory: (processEnvService: ProcessEnvService) => () => processEnvService.prepareEnv(config.clientVariables)
-        }
-      ]
+      providers: provideProcessEnv(config)
     };
   }
 

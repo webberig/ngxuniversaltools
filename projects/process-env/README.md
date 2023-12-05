@@ -21,6 +21,8 @@ server.get('*', (req, res) => {
 });
 ```
 
+If you're using the new `@angular/ssr` (Angular >= 17), the providers may be located elsewhere, i.e. `app.config.server.ts`.
+
 Next, import the `ProcessEnvModule` into your `AppModule`:
 ```typescript
 @NgModule({
@@ -35,6 +37,21 @@ Next, import the `ProcessEnvModule` into your `AppModule`:
   ],
 })
 export class AppModule {}
+```
+If you use standalone APIs, you can also use the `provideProcessEnv()` method:
+
+```
+export const appConfig: ApplicationConfig = {
+  providers: [
+      provideProcessEnv({
+        clientVariables: [
+          'API_URL',
+          'PUBLIC_KEY'
+        ],
+      }),
+  ]
+};
+
 ```
 
 You must provide the list of environment variables you want to transfer to the client app. Be careful not to transfer any sensitive information such
