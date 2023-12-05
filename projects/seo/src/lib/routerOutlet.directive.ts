@@ -5,6 +5,7 @@ import {PageAbstract} from "./PageAbstract";
 import {SeoService} from "./seo.service";
 
 @Directive({
+  // eslint-disable-next-line @angular-eslint/directive-selector
   selector: "router-outlet"
 })
 export class RouterOutletDirective {
