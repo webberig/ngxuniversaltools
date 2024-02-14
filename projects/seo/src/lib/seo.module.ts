@@ -1,17 +1,17 @@
 import {NgModule} from "@angular/core";
 import {SeoService} from "./seo.service";
-import {RouterOutletDirective} from "./routerOutlet.directive";
+import {SeoRouterOutletDirective} from "./seoRouterOutlet.directive";
 
 @NgModule({
-  declarations: [
-    RouterOutletDirective,
+  imports: [
+    SeoRouterOutletDirective,
   ],
   exports: [
-    RouterOutletDirective,
+    SeoRouterOutletDirective,
   ]
 })
 export class SeoModule {
-  static forRoot () {
+  static forRoot() {
     return {
       ngModule: SeoModule,
       providers: [

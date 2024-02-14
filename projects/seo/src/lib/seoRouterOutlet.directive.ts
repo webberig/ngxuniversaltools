@@ -5,10 +5,10 @@ import {PageAbstract} from "./PageAbstract";
 import {SeoService} from "./seo.service";
 
 @Directive({
-  // eslint-disable-next-line @angular-eslint/directive-selector
-  selector: "router-outlet"
+  selector: "[seoOutlet]",
+  standalone: true,
 })
-export class RouterOutletDirective {
+export class SeoRouterOutletDirective {
 
   constructor (r: RouterOutlet, seo: SeoService) {
     r.activateEvents.pipe(

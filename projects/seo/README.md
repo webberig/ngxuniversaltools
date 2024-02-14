@@ -19,6 +19,13 @@ imports: [
 ]
 ```
 
+In Standalone projects you can simply use `SeoService` without importing the module.
+
+Add the directive to every instance of `<router-outlet>` in your application:
+```
+<router-outlet seoOutlet></router-outlet>
+```
+
 ## Usage
 
 ### Setting title and meta tags
@@ -33,21 +40,19 @@ The `SeoService` provides methods to set different properties:
 
 ### Using PageAbstract
 
-This oppinionated part of the library can be used to allow components to easily provide meta data for the page. The
+This opinionated part of the library can be used to allow components to easily provide metadata for the page. The
 component
 declared in your route should extend the `PageAbstract` class and override properties when applicable. Finally you can
 use `@ngrx/effects` to subscribe to the `page$` observable and set the title and meta tags.
 
 Example:
 
-  ```typescript
-  {
-  path: "category",
-    component
-:
-  CategoryComponent,
+```
+{
+    path: "category",
+    component: CategoryComponent,
 }
-  ```
+```
 
 Your component should look like this:
 
