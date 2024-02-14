@@ -2,7 +2,7 @@ import {Inject, Injectable, makeStateKey, PLATFORM_ID, TransferState} from "@ang
 import {MonoTypeOperatorFunction, Observable, of, startWith, tap} from "rxjs";
 import {isPlatformBrowser, isPlatformServer} from "@angular/common";
 
-@Injectable()
+@Injectable({ providedIn: "root" })
 export class TransferStateHelper {
 
 

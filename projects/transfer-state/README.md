@@ -21,6 +21,8 @@ import {TransferStateModule} from '@ngxuniversaltools/transfer-state';
 export class AppModule {}
 ```
 
+In Standalone projects you can simply use `TransferStateService` without importing the module.
+
 ## Usage
 
 ```typescript
