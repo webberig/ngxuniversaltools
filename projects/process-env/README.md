@@ -9,7 +9,19 @@ make them available in the client app using TransferState.
 npm install @ngxuniversaltoolks/process-env
 ```
 
-Add the `PROCESS_ENV` provider to your `server.ts` file:
+Add the `PROCESS_ENV` provider to your `app.config.server.ts` file:
+
+```typescript
+import { PROCESS_ENV } from "@ngxuniversaltools/process-env";
+
+const serverConfig: ApplicationConfig = {
+  providers: [
+    {provide: PROCESS_ENV, useValue: process.env},
+  ],
+};
+```
+
+In older Angular projects in which you may not have an `app.config.server.ts` file, you can add the `PROCESS_ENV` provider to your server.ts file:
 ```typescript
 server.get('*', (req, res) => {
   res.render(indexHtml, {
@@ -21,24 +33,7 @@ server.get('*', (req, res) => {
 });
 ```
 
-If you're using the new `@angular/ssr` (Angular >= 17), the providers may be located elsewhere, i.e. `app.config.server.ts`.
-
-Next, import the `ProcessEnvModule` into your `AppModule`:
-```typescript
-@NgModule({
-  imports: [
-    ProcessEnvModule.forRoot({
-      // List of environment variables to transfer to the client app
-      clientVariables: [
-        'API_URL',
-        'PUBLIC_KEY'
-      ],
-    }),
-  ],
-})
-export class AppModule {}
-```
-If you use standalone APIs, you can also use the `provideProcessEnv()` method:
+Next, add the `provideProcessEnv` to your `app.config.ts`:
 
 ```
 export const appConfig: ApplicationConfig = {
@@ -54,8 +49,24 @@ export const appConfig: ApplicationConfig = {
 
 ```
 
-You must provide the list of environment variables you want to transfer to the client app. Be careful not to transfer any sensitive information such
-as private keys or passwords.
+If you are using `@NgModule` syntax, you can import a legacy Module:
+```typescript
+@NgModule({
+  imports: [
+    ProcessEnvModule.forRoot({
+      // List of environment variables to transfer to the client app
+      clientVariables: [
+        'API_URL',
+        'PUBLIC_KEY'
+      ],
+    }),
+  ],
+})
+export class AppModule {}
+```
+
+Important: You must provide the list of environment variables you want to transfer to the client app. **Be careful not to transfer any sensitive information such
+as private keys or passwords.**
 
 ## Usage
 
@@ -74,4 +85,4 @@ export class AppComponent {
 ## Sidenotes
 
 1. You can add [dotenv](https://www.npmjs.com/package/dotenv) to load environment variables from a `.env` file. This makes using environment during development easier.
-2. When you run the client app without the server (ie. `ng serve`), the environment is not transferred and will not be available. Make sure to provide a fallback such as the default environment file from Angular.
+2. In older versions of Angular universal, the environment variables may not be available when using `ng serve`. Make sure to provide a fallback such as the default environment file from Angular.

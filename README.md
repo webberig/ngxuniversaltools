@@ -1,27 +1,34 @@
-# NgxUniversalTools
+# Ngx universal tools
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 16.0.5.
+This project contains a collection of tools that are essential when creating an Angular Universal website.
 
-## Development server
+## Packages
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### @ngxuniversal/process-env
 
-## Code scaffolding
+Allows easy access to environment variables in your Angular application and
+make them available in the client app using TransferState.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+[Read more](projects/process-env/README.md)
 
-## Build
+### @ngxuniversal/seo
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Provides helper functions to manipulate meta tags, titles and JsonLD microdata.
 
-## Running unit tests
+[Read more](projects/seo/README.md)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### @ngxuniversal/transfer-state
 
-## Running end-to-end tests
+Provides easy access to TransferState mechanisms in observable chains.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+[Read more](projects/transfer-state/README.md)
 
-## Further help
+# Compatibility
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Please use the proper version of the packages for the Angular version you are using:
+
+| Angular Version | @ngxuniversal packages |
+|-----------------|------------------------|
+| 17.*            | 1.*                    |
+| 18.*            | 2.*                    |
+
