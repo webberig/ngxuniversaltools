@@ -1,9 +1,11 @@
-import {Inject, Injectable} from "@angular/core";
+import {inject, Inject, Injectable} from "@angular/core";
 import {Meta, MetaDefinition, Title} from "@angular/platform-browser";
 import {DOCUMENT} from "@angular/common";
 import {JsonLd} from "./seo.types";
 import {PageAbstract} from "./PageAbstract";
 import {ReplaySubject} from "rxjs";
+import {LdJson} from "./ldJson.service";
+import {Link} from "./link.service";
 
 function sanitizeObject<t extends object> (obj: t): t {
   const objClone = {...obj};
@@ -18,19 +20,20 @@ function sanitizeObject<t extends object> (obj: t): t {
 @Injectable({providedIn: "root"})
 export class SeoService<t extends PageAbstract = PageAbstract> {
 
+  private meta = inject(Meta);
+
+  private title = inject(Title);
+
+  private jsonLd = inject(LdJson);
+
+  private link = inject(Link);
+
   private tags: { [key: string]: MetaDefinition } = {};
 
   page$ = new ReplaySubject<t | null>(1);
 
   setPage (page: t | null) {
     this.page$.next(page);
-  }
-
-  constructor (
-    private meta: Meta,
-    private title: Title,
-    @Inject(DOCUMENT) private readonly document: Document,
-  ) {
   }
 
   setTitle (title: string) {
@@ -54,15 +57,15 @@ export class SeoService<t extends PageAbstract = PageAbstract> {
   }
 
   setJsonLd (jsonLd: JsonLd[]) {
-    let ldJsonScriptTag = this.document.head.querySelector("script[type='application/ld+json']");
-    if (ldJsonScriptTag) {
-      ldJsonScriptTag.textContent = JSON.stringify(jsonLd);
-    } else {
-      ldJsonScriptTag = this.document.createElement("script");
-      ldJsonScriptTag.setAttribute("type", "application/ld+json");
-      ldJsonScriptTag.textContent = JSON.stringify(jsonLd);
-      this.document.head.appendChild(ldJsonScriptTag);
-    }
+    this.jsonLd.setJsonLd(jsonLd);
+  }
+
+  setCanonical (url: string) {
+    this.link.setCanonical(url);
+  }
+
+  setHrefLangs (urls: { [locale in string]: string }) {
+    this.link.setHrefLangs(urls);
   }
 
   private updateTag (tag: MetaDefinition) {
